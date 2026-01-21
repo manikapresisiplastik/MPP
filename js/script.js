@@ -10,14 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function showSlide(index) {
         if(slides.length === 0) return;
         slides.forEach(s => s.classList.remove('active'));
-        
         if (index >= slides.length) currentSlide = 0;
         else if (index < 0) currentSlide = slides.length - 1;
         else currentSlide = index;
-        
         slides[currentSlide].classList.add('active');
     }
-
     function next() { showSlide(currentSlide + 1); resetTimer(); }
     function prev() { showSlide(currentSlide - 1); resetTimer(); }
     function resetTimer() { clearInterval(slideInterval); slideInterval = setInterval(next, 5000); }
@@ -28,31 +25,26 @@ document.addEventListener('DOMContentLoaded', () => {
         slideInterval = setInterval(next, 5000);
     }
 
-    /* --- 2. ANIMASI MOLECULAR PARTICLES (FUTURISTIC) --- */
+    /* --- 2. ANIMASI MOLECULAR PARTICLES --- */
     const canvas = document.getElementById('molecular-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
         let particlesArray;
-        
-        // Atur ukuran canvas
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // Handle resize window
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             initParticles();
         });
 
-        // Mouse interaction
         const mouse = { x: null, y: null, radius: 150 }
         window.addEventListener('mousemove', (event) => {
             mouse.x = event.x;
             mouse.y = event.y;
         });
 
-        // Class Partikel
         class Particle {
             constructor(x, y, directionX, directionY, size, color) {
                 this.x = x; this.y = y;
@@ -66,55 +58,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fill();
             }
             update() {
-                // Cek batas layar
                 if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
                 if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
 
-                // Cek interaksi mouse
                 let dx = mouse.x - this.x;
                 let dy = mouse.y - this.y;
                 let distance = Math.sqrt(dx*dx + dy*dy);
-                
                 if (distance < mouse.radius + this.size){
                     if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 2;
                     if (mouse.x > this.x && this.x > this.size * 10) this.x -= 2;
                     if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 2;
                     if (mouse.y > this.y && this.y > this.size * 10) this.y -= 2;
                 }
-
                 this.x += this.directionX;
                 this.y += this.directionY;
                 this.draw();
             }
         }
 
-        // Inisialisasi Partikel
         function initParticles() {
             particlesArray = [];
-            // Jumlah partikel: Desktop banyak, Mobile sedikit
             let numberOfParticles = (canvas.width * canvas.height) / 10000;
             if (window.innerWidth < 768) numberOfParticles = 35; 
-            
             for (let i = 0; i < numberOfParticles; i++) {
                 let size = (Math.random() * 2) + 1;
                 let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
                 let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
                 let directionX = (Math.random() * 0.4) - 0.2;
                 let directionY = (Math.random() * 0.4) - 0.2;
-                let color = 'rgba(0, 229, 255, 0.7)'; // Warna CYAN Neon
-
+                let color = 'rgba(0, 229, 255, 0.7)';
                 particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
             }
         }
 
-        // Garis Koneksi
         function connect() {
             let opacityValue = 1;
             for (let a = 0; a < particlesArray.length; a++) {
                 for (let b = a; b < particlesArray.length; b++) {
                     let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
                                    ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    
                     if (distance < (canvas.width/7) * (canvas.height/7)) {
                         opacityValue = 1 - (distance/20000);
                         ctx.strokeStyle = 'rgba(0, 229, 255,' + opacityValue * 0.15 + ')';
@@ -127,17 +109,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
-
         function animateParticles() {
             requestAnimationFrame(animateParticles);
             ctx.clearRect(0, 0, innerWidth, innerHeight);
-            
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-            }
+            for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); }
             connect();
         }
-
         initParticles();
         animateParticles();
     }
