@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PT. Manika Presisi Plastik | Plastic Packaging Solution</title>
+    <title>PT. Manika Presisi Plastik | Future Packaging Solution</title>
     
     <link rel="stylesheet" href="css/style.css">
     
@@ -27,26 +27,26 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Beranda</a></li>
+                <li><a href="#about">Tentang Kami</a></li>
                 <li><a href="#products">Katalog 3D</a></li>
                 <li><a href="#gallery">Galeri</a></li>
-                <li><a href="#about">Tentang Kami</a></li>
                 <li><a href="#contact" class="btn-nav">Hubungi Kami</a></li>
             </ul>
         </div>
     </nav>
 
     <section id="home" class="hero">
-        
         <div class="hero-slider">
             <div class="slide active" style="--bg-desktop: url('../images/hero-1.png'); --bg-mobile: url('../images/hero-1-mobile.png');"></div>
             <div class="slide" style="--bg-desktop: url('../images/hero-2.jpeg'); --bg-mobile: url('../images/hero-2-mobile.jpeg');"></div>
             <div class="slide" style="--bg-desktop: url('../images/hero-3.jpeg'); --bg-mobile: url('../images/hero-3-mobile.jpeg');"></div>
             <div class="slide" style="--bg-desktop: url('../images/hero-4.jpeg'); --bg-mobile: url('../images/hero-4-mobile.jpeg');"></div>
             <div class="slide" style="--bg-desktop: url('../images/hero-5.jpeg'); --bg-mobile: url('../images/hero-5-mobile.jpeg');"></div>
+			<div class="slide" style="--bg-desktop: url('../images/hero-6.jpeg'); --bg-mobile: url('../images/hero-6-mobile.jpeg');"></div>
+			<div class="slide" style="--bg-desktop: url('../images/hero-7.jpeg'); --bg-mobile: url('../images/hero-7-mobile.jpeg');"></div>
+			<div class="slide" style="--bg-desktop: url('../images/hero-8.jpeg'); --bg-mobile: url('../images/hero-8-mobile.jpeg');"></div>
         </div>
-        
         <div class="overlay"></div>
-
         <canvas id="molecular-canvas"></canvas>
         
         <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
@@ -65,6 +65,23 @@
         </div>
     </section>
 
+    <section id="about" class="about-section">
+        <div class="about-bg" style="background-image: url('images/company-bg.jpg');"></div>
+        <div class="container about-container">
+            <div class="about-glass-panel animate-up">
+                <div class="section-header-left">
+                    <h2>Tentang Kami</h2>
+                    <div class="line-left"></div>
+                </div>
+                <div class="about-text">
+                    <p> PT. Manika Presisi Plastik hadir sebagai bukti nyata dalam menghadirkan kualitas terbaik di setiap lini.</p>
+                    <p>Kami memahami bahwa setiap produk memiliki karakteristik unik. Oleh karena itu, kami menyediakan solusi pengemasan plastik yang aman, estetis, dan fungsional untuk berbagai sektor industri.</p>
+                    <p>Dengan dukungan teknologi manufaktur terbaru (Injection & Blow Molding) dan pengawasan mutu (Quality Control) yang ketat sesuai standar ISO, kami memastikan setiap produk terjaga integritasnya.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="products" class="products-cinematic">
         <div class="moving-bg"></div>
         <div class="container">
@@ -75,6 +92,7 @@
                     <button class="filter-btn active" data-filter="all">Semua</button>
                     <button class="filter-btn" data-filter="bottle">Botol</button>
                     <button class="filter-btn" data-filter="cap">Tutup</button>
+					<button class="filter-btn" data-filter="agro">Agro</button>
                     <button class="filter-btn" data-filter="jerrycan">Jerigen</button>
                 </div>
             </div>
@@ -85,9 +103,15 @@
                     <div class="bento-bg" style="background-image: url('images/produk-botol.png');"></div>
                     <div class="bento-content"><span class="category">Best Seller</span><h3>Pharma & Cosmetic Bottles</h3><p class="click-hint">Klik untuk Mode X-Ray</p></div>
                 </div>
+				
+				<div class="bento-item large animate-up product-card" data-category="bottle" 
+                     onclick="openTechModal('Body Wash Bottle', 'HDPE', '26 gram', 'Intrawhite & Color', 'images/produk-oilum.png')">
+                    <div class="bento-bg" style="background-image: url('images/produk-oilum.png');"></div>
+                    <div class="bento-content"><span class="category">Skin Care</span><h3>Cosmetic Bottles</h3><p class="click-hint">Klik untuk Mode X-Ray</p></div>
+                </div>
                 
                 <div class="bento-item animate-up product-card" data-category="cap" 
-                     onclick="openTechModal('Precision Flip Top & Ulir', 'PP', '3.2 gram', 'Intrawhite', 'images/produk-tutup.png')">
+                     onclick="openTechModal('Precision Flip Top & Ulir', 'PP', '9 gram', 'Intrawhite & Colmaster Orange', 'images/produk-tutup.png')">
                     <div class="bento-bg" style="background-image: url('images/produk-tutup.png');"></div>
                     <div class="bento-content"><span class="category">Accessory</span><h3>Caps</h3><p class="click-hint">Klik untuk Mode X-Ray</p></div>
                 </div>
@@ -98,10 +122,16 @@
                     <div class="bento-content"><span class="category">Baby Care</span><h3>Baby Powder & Liquid</h3><p class="click-hint">Klik untuk Mode X-Ray</p></div>
                 </div>
                 
-                <div class="bento-item wide animate-up product-card" data-category="jerrycan" 
-                     onclick="openTechModal('Heavy Duty Jerrycan', 'HDPE Ind.', '70 gram', 'Natural', 'images/produk-agro.png')">
+                <div class="bento-item wide animate-up product-card" data-category="agro" 
+                     onclick="openTechModal('Heavy Duty Agro', 'HDPE Ind.', '70 gram', 'Natural, White & Yellow', 'images/produk-agro.png')">
                     <div class="bento-bg" style="background-image: url('images/produk-agro.png');"></div>
-                    <div class="bento-content"><span class="category">Industrial</span><h3>Agro & Jerrycan Series</h3><p class="click-hint">Klik untuk Mode X-Ray</p></div>
+                    <div class="bento-content"><span class="category">Kimia</span><h3>Agro Series</h3><p class="click-hint">Klik untuk Mode X-Ray</p></div>
+                </div>
+
+		 <div class="bento-item wide animate-up product-card" data-category="jerrycan" 
+                     onclick="openTechModal('Heavy Duty Jerrycan', 'HDPE Ind.', '70 gram', 'Natural & White', 'images/produk-jerrycan.png')">
+                    <div class="bento-bg" style="background-image: url('images/produk-jerrycan.png');"></div>
+                    <div class="bento-content"><span class="category">Industrial</span><h3>Jerrycan Series</h3><p class="click-hint">Klik untuk Mode X-Ray</p></div>
                 </div>
 
                 <div class="bento-item wide animate-up product-card" data-category="bottle" 
@@ -125,16 +155,6 @@
         </div>
     </section>
 
-    <section id="about" class="about-section">
-        <div class="container">
-            <div class="section-header"><h2>Tentang Kami</h2><div class="line"></div></div>
-            <div class="about-content animate-up">
-                <p>PT. Manika Presisi Plastik hadir sebagai bukti nyata dari komitmen dalam menghadirkan kualitas terbaik di setiap lini. Kami menyediakan solusi pengemasan plastik yang aman, estetis, dan fungsional untuk berbagai sektor industri.</p>
-                <p>Dengan dukungan teknologi manufaktur terbaru dan pengawasan mutu (Quality Control) yang ketat sesuai standar ISO, kami memastikan setiap botol dan tutup mampu menjaga integritas isi produk Anda.</p>
-            </div>
-        </div>
-    </section>
-
     <section id="vision" class="vision-section">
         <div class="vision-bg-wrapper">
             <div class="vision-bg" style="--bg-desktop: url('../images/visihero-1.png'); --bg-mobile: url('../images/visihero-1-mobile.png');"></div>
@@ -143,7 +163,7 @@
         <div class="container vision-content-wrapper">
             <div class="vision-box animate-up">
                 <h2>Visi</h2>
-                <p>"Menjadi pemimpin industri kemasan plastik presisi yang menetapkan standar kualitas global melalui inovasi berkelanjutan."</p>
+                <p>"Menjadi pemimpin industri kemasan plastik presisi yang menetapkan standar kualitas global melalui inovasi berkelanjutan dan integritas layanan."</p>
             </div>
             <div class="mission-grid">
                 <div class="mission-card animate-up"><div class="card-glass"><span class="num">01</span><h4>Customer Satisfaction</h4><p>Memberikan produk bermutu tinggi dan pengiriman tepat waktu.</p></div></div>
@@ -162,8 +182,17 @@
                     <div class="info-card glass-effect"><div class="icon-circle"><i class="fas fa-phone-volume"></i></div><h4>Layanan Pelanggan</h4><p>+62 251 865 4321 (Office)<br><a href="https://wa.me/6281234567890" target="_blank" class="wa-link">Chat WhatsApp Sekarang</a></p></div>
                     <div class="info-card glass-effect"><div class="icon-circle"><i class="fas fa-envelope-open-text"></i></div><h4>Email Bisnis</h4><p>marketing@manikapresisi.co.id</p></div>
                 </div>
-                <div class="map-container animate-up"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.839626330064!2d106.81525631477085!3d-6.541916995268472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c3e290000001%3A0x6b09990833200788!2sBogor%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1646721234567" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
-            </div>
+                <div class="map-container animate-up">
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.8506360948804!2d106.82363457587866!3d-6.540538593452309!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c151632a612f%3A0xf1f43b78dbf9e2ca!2sPT.GALENIUM%20PHARMASI!5e0!3m2!1sid!2sid!4v1768983761143!5m2!1sid!2sid" 
+        width="100%" 
+        height="450" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+</div>
         </div>
     </section>
 
@@ -194,7 +223,7 @@
                 <div class="tech-info-panel">
                     <h2 id="techTitle">Product Name</h2>
                     <div class="scan-line"></div>
-                    <p class="tech-desc">Produk ini diproses menggunakan teknologi blow injeksi presisi tinggi untuk menjamin kerapatan dan kualitas produk yang sempurna.</p>
+                    <p class="tech-desc">Produk ini diproses menggunakan teknologi mesin injection dan injection blow presisi tinggi untuk menjamin produk yang yang berkualitas.</p>
                     <a href="https://wa.me/6281234567890" target="_blank" class="btn-tech"><i class="fab fa-whatsapp"></i> KONSULTASI TEKNIKAL</a>
                 </div>
             </div>
@@ -202,12 +231,8 @@
     </div>
 
     <div id="lightbox" class="lightbox" onclick="closeLightbox()"><span class="close-lightbox">×</span><img id="lightbox-img" src=""></div>
-    
     <a href="https://wa.me/6281234567890" class="wa-float" target="_blank"><div class="wa-tooltip">Chat Support</div><i class="fab fa-whatsapp" style="font-size: 35px; color: white;"></i></a>
 
     <script src="js/script.js"></script>
 </body>
-
 </html>
-
-
