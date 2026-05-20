@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         slideInterval = setInterval(nextSlide, 5000);
     }
 
-    // --- 4. MOLECULAR NETWORK (FIXED BUGS) ---
+    // --- 4. MOLECULAR NETWORK (DENGAN INTERAKSI KURSOR MOUSE) ---
     const initMolecularNetwork = () => {
         const canvas = document.getElementById('molecular-canvas');
         if (!canvas) return;
@@ -66,6 +66,25 @@ document.addEventListener("DOMContentLoaded", () => {
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
         const colors = ['rgba(0, 229, 255, 0.6)', 'rgba(255, 255, 255, 0.4)'];
+
+        // Objek untuk melacak posisi Kursor
+        let mouse = {
+            x: null,
+            y: null,
+            radius: 20000 // Jangkauan tarikan kursor ke partikel (area deteksi)
+        };
+
+        // Event listener untuk melacak pergerakan mouse di layar
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        // Hapus titik pusat mouse jika kursor keluar dari jendela browser
+        window.addEventListener('mouseout', () => {
+            mouse.x = undefined;
+            mouse.y = undefined;
+        });
 
         function setCanvasSize() {
             canvas.width = window.innerWidth;
@@ -106,9 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         function connect() {
-            // FIX: Menggunakan perhitungan jarak mutlak agar opacity tidak pernah menjadi minus
             let maxDistance = 15000; 
             for (let a = 0; a < particlesArray.length; a++) {
+                
+                // 1. Logika Partikel terhubung dengan Partikel Lain
                 for (let b = a; b < particlesArray.length; b++) {
                     let dx = particlesArray[a].x - particlesArray[b].x;
                     let dy = particlesArray[a].y - particlesArray[b].y;
@@ -116,7 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     if (distance < maxDistance) {
                         let opacityValue = 1 - (distance / maxDistance);
-                        // Pengaman ganda agar tidak error di canvas
                         if(opacityValue < 0) opacityValue = 0; 
                         
                         ctx.strokeStyle = `rgba(0, 229, 255, ${opacityValue})`;
@@ -124,6 +143,26 @@ document.addEventListener("DOMContentLoaded", () => {
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
                         ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+
+                // 2. Logika Partikel terhubung dengan Kursor Mouse
+                if (mouse.x != undefined && mouse.y != undefined) {
+                    let dxMouse = particlesArray[a].x - mouse.x;
+                    let dyMouse = particlesArray[a].y - mouse.y;
+                    let distanceMouse = (dxMouse * dxMouse) + (dyMouse * dyMouse);
+
+                    if (distanceMouse < mouse.radius) {
+                        let opacityMouse = 1 - (distanceMouse / mouse.radius);
+                        if(opacityMouse < 0) opacityMouse = 0;
+
+                        // Garis yang terhubung ke kursor dibuat sedikit lebih terang
+                        ctx.strokeStyle = `rgba(0, 229, 255, ${opacityMouse + 0.2})`;
+                        ctx.lineWidth = 1; 
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(mouse.x, mouse.y);
                         ctx.stroke();
                     }
                 }
@@ -241,12 +280,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // --- 8. SCROLL ANIMATION (FIXED BUGS) ---
+    // --- 8. SCROLL ANIMATION ---
     const animateElements = document.querySelectorAll('.animate-up');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Gunakan class toggle daripada menyuntikkan inline style
                 entry.target.classList.add('is-visible');
                 observer.unobserve(entry.target);
             }
